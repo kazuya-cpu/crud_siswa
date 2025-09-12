@@ -6,11 +6,11 @@
 </head>
 <body>
     <h2>Tambah Data Siswa</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post">
         <label>Nama:</label><br>
         <input type="text" name="nama" required><br>
-        <label>Foto:</label><br>
-        <input type="file" name="foto"><br>
+        <label>Foto (nama file di folder img/):</label><br>
+        <input type="text" name="foto" placeholder="contoh: amel.jpg" required><br>
         <label>Kelas:</label><br>
         <input type="text" name="kelas" required><br>
         <label>Jurusan:</label><br>
@@ -25,18 +25,14 @@
 <?php
 if (isset($_POST['simpan'])) {
     $nama = $_POST['nama'];
+    $foto = $_POST['foto'];
     $kelas = $_POST['kelas'];
     $jurusan = $_POST['jurusan'];
     $email = $_POST['email'];
     $nohp = $_POST['nohp'];
 
-    $foto = $_FILES['foto']['name'];
-    $tmp = $_FILES['foto']['tmp_name'];
-    if ($foto != "") {
-        move_uploaded_file($tmp, "uploads/".$foto);
-    }
-
-    $query = mysqli_query($koneksi, "INSERT INTO siswa (nama, foto, kelas, jurusan, email, nohp) VALUES ('$nama','$foto','$kelas','$jurusan','$email','$nohp')");
+    $query = mysqli_query($koneksi, "INSERT INTO siswa (nama, foto, kelas, jurusan, email, nohp) 
+                                     VALUES ('$nama','$foto','$kelas','$jurusan','$email','$nohp')");
     if ($query) {
         header("Location: index.php");
     } else {

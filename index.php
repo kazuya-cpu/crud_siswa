@@ -26,7 +26,7 @@
         ?>
         <tr>
             <td><?= $no++; ?></td>
-            <td><img src="uploads/<?= $row['foto']; ?>" width="60"></td>
+            <td><img src="img/<?= $row['foto']; ?>" width="60"></td>
             <td><?= $row['nama']; ?></td>
             <td><?= $row['kelas']; ?></td>
             <td><?= $row['jurusan']; ?></td>

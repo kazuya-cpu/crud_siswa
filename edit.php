@@ -10,13 +10,13 @@ $row = mysqli_fetch_array($data);
 </head>
 <body>
     <h2>Edit Data Siswa</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post">
         <input type="hidden" name="id" value="<?= $row['id']; ?>">
         <label>Nama:</label><br>
         <input type="text" name="nama" value="<?= $row['nama']; ?>" required><br>
-        <label>Foto:</label><br>
-        <input type="file" name="foto"><br>
-        <img src="uploads/<?= $row['foto']; ?>" width="60"><br>
+        <label>Foto (nama file di folder img/):</label><br>
+        <input type="text" name="foto" value="<?= $row['foto']; ?>" required><br>
+        <img src="img/<?= $row['foto']; ?>" width="60"><br>
         <label>Kelas:</label><br>
         <input type="text" name="kelas" value="<?= $row['kelas']; ?>" required><br>
         <label>Jurusan:</label><br>
@@ -32,20 +32,13 @@ $row = mysqli_fetch_array($data);
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
     $nama = $_POST['nama'];
+    $foto = $_POST['foto'];
     $kelas = $_POST['kelas'];
     $jurusan = $_POST['jurusan'];
     $email = $_POST['email'];
     $nohp = $_POST['nohp'];
 
-    $foto = $_FILES['foto']['name'];
-    $tmp = $_FILES['foto']['tmp_name'];
-
-    if ($foto != "") {
-        move_uploaded_file($tmp, "uploads/".$foto);
-        $update = mysqli_query($koneksi, "UPDATE siswa SET nama='$nama', foto='$foto', kelas='$kelas', jurusan='$jurusan', email='$email', nohp='$nohp' WHERE id='$id'");
-    } else {
-        $update = mysqli_query($koneksi, "UPDATE siswa SET nama='$nama', kelas='$kelas', jurusan='$jurusan', email='$email', nohp='$nohp' WHERE id='$id'");
-    }
+    $update = mysqli_query($koneksi, "UPDATE siswa SET nama='$nama', foto='$foto', kelas='$kelas', jurusan='$jurusan', email='$email', nohp='$nohp' WHERE id='$id'");
 
     if ($update) {
         header("Location: index.php");
