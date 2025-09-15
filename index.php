@@ -1,5 +1,11 @@
-<?php include "koneksi.php"; 
-session_start();
+<?php 
+include "koneksi.php"; 
+session_start(); 
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,5 +47,6 @@ session_start();
         </tr>
         <?php } ?>
     </table>
+    <a href="logout.php">Logout</a>
 </body>
 </html>
